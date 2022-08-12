@@ -22,10 +22,18 @@ class CustomerController extends Controller
       ]);
       */
     //$data = Customer::all();
-    $data = Customer::orderBy('id','desc')->paginate(5);
+    $data = Customer::orderBy('nama','asc')->paginate(5);
     return view('customer.index', [
       "title" => "Customers",
     ])->with('customer', $data);
+  }
+
+  public function search(Request $request){
+    $search = $request->search;
+    $customers = Customer::where('nama', 'like', '%'.$search.'%')->orderBy('nama','asc')->paginate(5); 
+//    dd($customers);
+    return view('customer.index', ['customer' => $customers, 'title' => "Customers" ]);
+
   }
 
   /**

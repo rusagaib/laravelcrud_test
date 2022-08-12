@@ -33,7 +33,7 @@ Route::group(['middleware' => ['guest']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
   Route::resource('/customer', CustomerController::class);
-
+  Route::get('/search', [CustomerController::class, 'search']);
   Route::post('/logout', [LoginController::class, 'logout']);
 });
 

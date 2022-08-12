@@ -9,6 +9,12 @@
               <a href="{{ url('/customer/create') }}" class="btn btn-success btn-sm" title="Add New customer">
                   Add New
               </a>
+              <form action="/search" method="get">
+                <input type="search" name="search" id="search" class="form-control">
+                <span class="input-group-prepend">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </span> 
+              </form>
               <br/>
               <br/>
               <div class="table-responsive">
