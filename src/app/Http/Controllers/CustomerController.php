@@ -21,7 +21,8 @@ class CustomerController extends Controller
         "customers" => $data,
       ]);
       */
-    $data = Customer::all();
+    //$data = Customer::all();
+    $data = Customer::orderBy('id','desc')->paginate(5);
     return view('customer.index', [
       "title" => "Customers",
     ])->with('customer', $data);

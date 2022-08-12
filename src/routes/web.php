@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +15,29 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', function () {
+Route::get('/', function () {
   return view('home', [
     "title" => "Home"
   ]);
 });
 
-Route::resource('/customer', CustomerController::class);
+Route::group(['middleware' => ['guest']], function() {
+  Route::get('/login', [LoginController::class, 'index'])->name('login');
+  Route::post('/login', [LoginController::class, 'auth']);
 
-/*
-Route::get('/customer', function () {
-  return view('customer', [
-    "title" => "Customers"
-  ]);
 });
- */
+
+Route::group(['middleware' => ['auth']], function() {
+  Route::resource('/customer', CustomerController::class);
+
+  Route::post('/logout', [LoginController::class, 'logout']);
+});
+
+
+
+
+
