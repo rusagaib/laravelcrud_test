@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($customer as $item)
+                        @forelse($customer as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama }}</td>
@@ -36,11 +36,15 @@
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('customer.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE') 
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Customer" onclick="return confirm("Confirm delete?")"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Customer" onclick="return confirm("Confirm delete?")"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Delete</button>
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <div class="alert alert-danger">
+                                Data Post belum Tersedia.
+                            </div>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
