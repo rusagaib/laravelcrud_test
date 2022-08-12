@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,12 @@ Route::get('/home', function () {
   ]);
 });
 
+Route::resource('/customer', CustomerController::class);
+
+/*
 Route::get('/customer', function () {
   return view('customer', [
     "title" => "Customers"
   ]);
 });
+ */
